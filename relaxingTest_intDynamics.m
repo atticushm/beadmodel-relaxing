@@ -28,7 +28,7 @@ calB = 0;                                       % brownian dimensionless group (
 beta = 1;                               
 calS = (1/(beta))*5e4;                        % spring-bending dimensionless group.
 
-Nb11 = 11;
+%Nb11 = 11;
 Nb71 = 71;                                        % number of beads.
 
 epsilon = a;
@@ -41,7 +41,7 @@ t    = [tMin:dt:tMax];
 Nt   = length(t);
 
 Nt = length(t);                                  % number of time steps.
-b011 = 1/(Nb11-1);                                   % equilibrium distance between beads.
+%b011 = 1/(Nb11-1);                                   % equilibrium distance between beads.
 b071 = 1/(Nb71-1);
 
 %% Set initial position.
@@ -52,13 +52,13 @@ ySave(:,1) = intConfig(x);
 yc(1)      = mean(ySave(:,1));
 
 % for bead model:
-xbSave11    = zeros(3,Nb11,2);                       % stores bead pos. at 2 time steps.
+%xbSave11    = zeros(3,Nb11,2);                       % stores bead pos. at 2 time steps.
 xbSave71    = zeros(3,Nb71,2);                       % stores bead pos. at 2 time steps.
-xc11        = zeros(3,Nt);                         % stores the xyz positions of the centre of mass at nt time-steps.
+%xc11        = zeros(3,Nt);                         % stores the xyz positions of the centre of mass at nt time-steps.
 xc71        = zeros(3,Nt);                         % stores the xyz positions of the centre of mass at nt time-steps.
 
-xbSave11(1,:,1) = linspace(0,L,Nb11)/L;              % equally space nodes in x-plane.
-xbSave11(2,:,1) = intConfig(xbSave11(1,:,1));
+%xbSave11(1,:,1) = linspace(0,L,Nb11)/L;              % equally space nodes in x-plane.
+%xbSave11(2,:,1) = intConfig(xbSave11(1,:,1));
 xc11(:,1)       = mean(xbSave11(:,:,1),2);               % initial centre of mass.
 
 xbSave71(1,:,1) = linspace(0,L,Nb71)/L;              % equally space nodes in x-plane.
@@ -92,8 +92,8 @@ for n = 1:Nt
     ySave(:,2) = inv(M)*ySave(:,1);
     
     % Bead model.
-    X11  = xbSave11(:,:,1);
-    Xc11 = xc11(:,n);
+    %X11  = xbSave11(:,:,1);
+    %Xc11 = xc11(:,n);
     F11 = zeros(3,Nb11);
     U11 = zeros(3,Nb11);
     
@@ -103,26 +103,26 @@ for n = 1:Nt
     U71 = zeros(3,Nb71);
 
     %% bending forces.            
-    Fb11 = get_bending_forces(X11);
-    F11 = F11 + (Nb11-1).*Fb11;
+    %Fb11 = get_bending_forces(X11);
+    %F11 = F11 + (Nb11-1).*Fb11;
     
     Fb71 = get_bending_forces(X71);
     F71 = F71 + (Nb71-1).*Fb71;
 
     %% spring forces.
-    Fs11 = get_spring_forces(X11, b011);
-    F11  = F11 + calS.*Fs11;
+    %Fs11 = get_spring_forces(X11, b011);
+    %F11  = F11 + calS.*Fs11;
     
     Fs71 = get_spring_forces(X71, b071);
     F71  = F71 + calS.*Fs71;
 
     %% hydrodynamic interactions. 
-    for p = 1:Nb11      
-        clear stokeslets11
-        stokeslets11 = get_stokeslets(X11, xbSave11(:,p,1),epsilon);
-        G11 = reshape(F11',[1,3*Nb11])';
-        U11(:,p) = stokeslets11*G11;
-    end 
+    %for p = 1:Nb11      
+    %    clear stokeslets11
+    %    stokeslets11 = get_stokeslets(X11, xbSave11(:,p,1),epsilon);
+    %    G11 = reshape(F11',[1,3*Nb11])';
+    %    U11(:,p) = stokeslets11*G11;
+    %end 
     for p = 1:Nb71      
         clear stokeslets71
         stokeslets71 = get_stokeslets(X71, xbSave71(:,p,1),epsilon);
@@ -132,8 +132,8 @@ for n = 1:Nt
 
 
     %% update positions and centre of mass.
-    xbSave11(:,:,2) = xbSave11(:,:,1) + U11*dt;
-    xc11(:,n+1) = mean(xbSave11(:,:,2),2);
+    %xbSave11(:,:,2) = xbSave11(:,:,1) + U11*dt;
+    %xc11(:,n+1) = mean(xbSave11(:,:,2),2);
     
     xbSave71(:,:,2) = xbSave71(:,:,1) + U71*dt;
     xc71(:,n+1) = mean(xbSave71(:,:,2),2);   
@@ -162,14 +162,14 @@ for n = 1:Nt
     end
 
     %% replace saved data.
-    xbSave11(:,:,1) = xbSave11(:,:,2);    
+    %xbSave11(:,:,1) = xbSave11(:,:,2);    
     xbSave71(:,:,1) = xbSave71(:,:,2);
     
     ySave(:,1) = ySave(:,2);
     
     %% store points of interest.
-    xbMid11(:,n) = xbSave11(:,ceil(Nb11/2),1);    % mid bead
-    xbEnd11(:,n) = xbSave11(:,Nb11,1);            % end bead
+    %xbMid11(:,n) = xbSave11(:,ceil(Nb11/2),1);    % mid bead
+    %xbEnd11(:,n) = xbSave11(:,Nb11,1);            % end bead
     
     xbMid71(:,n) = xbSave71(:,ceil(Nb71/2),1);    % mid bead
     xbEnd71(:,n) = xbSave71(:,Nb71,1);            % end bead
@@ -190,6 +190,12 @@ disp('Script complete.')
 
 function y = intConfig(x)
 % Defines the shape of the filament at initial time.
+y = 0.6.*(x-0.5).^2;
+end
+
+function y = intConfigLegacy(x)
+% Defines the shape of the filament at initial time.
+% This function was used in the original relaxing rod tests of the bead model.
 y = 0.4.*(x-0.5).^2;
 end
 
