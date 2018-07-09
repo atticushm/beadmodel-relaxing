@@ -87,9 +87,6 @@ for n = 1:Nt
     ySave(:,2) = inv(M)*ySave(:,1);
 
     % Bead model.
-    F11 = zeros(3,Nb11);
-    U11 = zeros(3,Nb11);
-
     X71  = xbSave71(:,:,1);
     Xc71 = xc71(:,n);
     F71 = zeros(3,Nb71);
