@@ -4,9 +4,6 @@
 % Finite Difference scheme is central divided differences in space, with
 % implicit (backward) Euler in time.
 
-% edited in Atom and uploaded using GitHub desktop.
-% extra edit done in Atom editor.
-
 clear all; close all
 % viewInt = 0;
 
@@ -107,7 +104,6 @@ for n = 1:Nt
         G71 = reshape(F71',[1,3*Nb71])';
         U71(:,p) = stokeslets71*G71;
     end
-
 
     %% update positions and centre of mass.
     xbSave71(:,:,2) = xbSave71(:,:,1) + U71*dt;
