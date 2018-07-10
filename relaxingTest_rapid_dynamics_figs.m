@@ -18,7 +18,7 @@ beadIntLeg      = zeros(3,Nb);
 beadIntLeg(1,:) = linspace(0,1,Nb);
 beadIntLeg(2,:) = intConfigLeg(beadIntLeg(1,:));
 
-h1          = subplot(1,2,1);
+h1          = subplot(1,3,1);
 hold on
 box on
 intBead     = draw_bm_relaxing(beadInt);
@@ -28,10 +28,21 @@ lgd1        = legend([intBead,intBeadLeg],'New initial config.','Legacy initial 
 set(lgd1,'Interpreter','latex')
 hold off
 
+%% Final config.
+h1          = subplot(1,3,2);
+beadFin     = xbSave71(:,:,2);
+
+hold on
+box on
+finBead     = draw_bm_relaxing(beadFin);
+% finBeadLeg  = draw_bm_relaxing_leg(beadIntLeg);
+
+hold off
+
 
 %% Fast dynamics insert
 
-h1 = subplot(1,2,2)
+h1 = subplot(1,3,3);
 hold on
 box on
 BMc   = plot(t,xc71(2,2:end),'r','LineWidth',1);
@@ -42,8 +53,8 @@ hold off
 
 
 %% Resize figure window and save pdf
-set(h1,'pos',[100 100 520 550])
-set(h2,'pos',[900 100 860 550])
+% set(h1,'pos',[100 100 520 550])
+% set(h2,'pos',[900 100 860 550])
 % pos = get(gcf,'Position');
 % set(gcf,'PaperPositionMode','Auto','PaperUnits','Inches','PaperSize',[pos(3),pos(4)])
 % print(gcf,'compPlots71Mat','-dpdf','-r0')

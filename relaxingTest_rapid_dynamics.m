@@ -33,7 +33,7 @@ Nb71 = 71;                                        % number of beads.
 epsilon = a;
 
 tMin = 0;
-tMax = 5e-5;
+tMax = 5e-4;
 
 dt   = 1e-9;
 t    = [tMin:dt:tMax];
