@@ -1,22 +1,37 @@
 %% Import workspace and plot figures for relaxing tests.
 
-clear all; clc; clf;
-load('workspace_rapid_dynamics.mat')
+%% Get variables needed from new and legacy workspaces.
 
-%% Initial config.
+clear all; clc; clf;
+
+% New variables:
+load('workspace_rapid_dynamics.mat','x','xbSave71','xc71','Nb71','t','yc')
 xInt    = x;
 yInt    = intConfig(xInt);
 ycInt   = yc(1);
 yIntLeg = intConfigLeg(xInt);
+
+beadFin      = xbSave71(:,:,2);
+XcNew        = xc71;
+tNew         = t;
 
 Nb           = Nb71;
 beadInt      = zeros(3,Nb);
 beadInt(1,:) = linspace(0,1,Nb);
 beadInt(2,:) = intConfig(beadInt(1,:));
 
+
+% Legacy variables:
+load('workspace_rapid_dynamics_leg.mat','xbSave71','xc71','t')
 beadIntLeg      = zeros(3,Nb);
 beadIntLeg(1,:) = linspace(0,1,Nb);
 beadIntLeg(2,:) = intConfigLeg(beadIntLeg(1,:));
+
+beadFinLeg      = xbSave71(:,:,2);
+XcLeg           = xc71;
+tLeg            = t;
+
+%% Initial config.
 
 h1          = subplot(1,3,1);
 hold on
@@ -30,12 +45,11 @@ hold off
 
 %% Final config.
 h1          = subplot(1,3,2);
-beadFin     = xbSave71(:,:,2);
 
 hold on
 box on
 finBead     = draw_bm_relaxing(beadFin);
-% finBeadLeg  = draw_bm_relaxing_leg(beadIntLeg);
+finBeadLeg  = draw_bm_relaxing_leg(beadFinLeg);
 
 hold off
 
@@ -45,7 +59,8 @@ hold off
 h1 = subplot(1,3,3);
 hold on
 box on
-BMc   = plot(t,xc71(2,2:end),'r','LineWidth',1);
+cNew   = plot(tNew,XcNew(2,2:end),'b','LineWidth',1.2);
+cLeg   = plot(tLeg,XcLeg(2,2:end),'r','LineWidth',1.2);
 % xlabel('time')
 % axis([0 1.4e-5 0.03423 0.03432])
 % ylabel('$y$','Interpreter','latex')
