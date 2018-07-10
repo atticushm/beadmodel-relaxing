@@ -1,0 +1,16 @@
++--------------------------------------------------------------------------+
+| Job on the BlueBEAR cluster:
+| Starting at Mon Jul  9 14:47:47 2018 for axh968(594845)
+| Identity jobid 1446706 jobname config.sh
+| Running against project smithdjy06 and in partition broadwell-shared
+| Requested cpu=4,mem=20000M,node=2 - 2-00:00:00 walltime
+| Assigned to nodes bber0501u27b,bber0501u28b
+| Command /rds/projects/2017/gallagmt-rapid-sperm-capture/ALHM/relaxingTests/relaxingTest_intDynamics/config.sh
+| WorkDir /rds/projects/2017/gallagmt-rapid-sperm-capture/ALHM/relaxingTests/relaxingTest_intDynamics
++--------------------------------------------------------------------------+
++--------------------------------------------------------------------------+
+| Finished at Mon Jul  9 15:02:17 2018 for axh968(594845) on the BlueBEAR Cluster
+| Required (14:08.030 cputime, 450092K memory used) - 00:14:30 walltime
+| JobState COMPLETING - Reason None
+| Exitcode 0:0
++--------------------------------------------------------------------------+
