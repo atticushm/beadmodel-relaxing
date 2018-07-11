@@ -14,6 +14,7 @@ yIntLeg = intConfigLeg(xInt);
 beadFin      = xbSave71(:,:,2);
 XcNew        = xc71;
 tNew         = t;
+tNewMax      = t(end);
 
 Nb           = Nb71;
 beadInt      = zeros(3,Nb);
@@ -43,27 +44,23 @@ lgd1        = legend([intBead,intBeadLeg],'New initial config.','Legacy initial 
 set(lgd1,'Interpreter','latex')
 hold off
 
-%% Final config.
-h1          = subplot(1,3,2);
+%% Fast dynamics insert
 
+h1 = subplot(1,3,2);
 hold on
 box on
-finBead     = draw_bm_relaxing(beadFin);
-finBeadLeg  = draw_bm_relaxing_leg(beadFinLeg);
-
+cLeg   = plot(tLeg,XcLeg(2,2:end),'r','LineWidth',1.2);
+xlabel('time','interpreter','latex')
+axis([0 2e-5 0.03423 0.03432])
+% ylabel('$y$','Interpreter','latex')
 hold off
-
-
-%% Fast dynamics insert
 
 h1 = subplot(1,3,3);
 hold on
 box on
 cNew   = plot(tNew,XcNew(2,2:end),'b','LineWidth',1.2);
-cLeg   = plot(tLeg,XcLeg(2,2:end),'r','LineWidth',1.2);
-% xlabel('time')
-% axis([0 1.4e-5 0.03423 0.03432])
-% ylabel('$y$','Interpreter','latex')
+xlabel('time','interpreter','latex')
+axis([0 2e-5 0.051 0.0516])
 hold off
 
 
